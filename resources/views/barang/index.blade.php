@@ -26,6 +26,9 @@
           <div class="card-header">
             <a href="{{ url('/barang/create') }}">
               <button type="button" class="btn btn-primary">Add New</button>
+              <a href="{{ url('/barang/export') }}">
+              <button type="button" class="btn btn-success">Export</button>
+            </a>
             </a>
           </div>
           <div class="card-body">

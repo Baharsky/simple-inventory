@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use App\Jurusan;
 use App\Fakultas;
 use DB;
+use App\Exports\JurusanExport;
+use Maatwebsite\Excel\Facades\Excel;
 
 class JurusanController extends Controller
 {
@@ -89,6 +91,11 @@ class JurusanController extends Controller
         $jurusan->delete($jurusan);
 
         return redirect('jurusan');
+    }
+
+    public function export(Request $request){
+
+        return Excel::download(new JurusanExport, 'jurusan-'.date("Y-m-d").'.xlsx');
     }
 
 }

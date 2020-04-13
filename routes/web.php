@@ -30,6 +30,7 @@ Route::post('/fakultas/{id}/update', 'FakultasController@update');
 Route::get('/fakultas/{id}/delete', 'FakultasController@delete');
 
 
+
 //JURUSAN
 Route::get('jurusan', ['as' => 'jurusan.index', 'uses' => 'JurusanController@index']);
 //create
@@ -42,7 +43,8 @@ Route::post('/jurusan/{id}/update', 'JurusanController@update');
 Route::get('/jurusan/{id}/delete', 'JurusanController@delete');
 //search
 Route::get('/jurusan/search', 'JurusanController@search');
-
+//export
+Route::get('/jurusan/export', 'JurusanController@export');
 
 //RUANGAN
 Route::get('ruangan', ['as' => 'ruangan.index', 'uses' => 'RuanganController@index']);
@@ -74,4 +76,6 @@ Route::post('/barang/{id}/update', 'BarangController@update');
 Route::get('/barang/{id}/delete', 'BarangController@delete');
 //search
 Route::get('/barang/search', 'BarangController@search');
+//export
+Route::get('/barang/export', 'BarangController@export');
 });
