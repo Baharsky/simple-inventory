@@ -35,15 +35,21 @@ class BarangController extends Controller
             'nama_barang' => 'required',
             'total' => 'required',
             'broken' => 'required',
+            'foto_bar' => 'required|image|mimes:jpeg,jpg,png|max:2048',
             'created_by' => 'required',
             'updated_by' => 'required'          
          ]);
+
+        $files = $request->file('foto_bar');
+        $imagebar = 'BRG-' . $request->nama_barang . '.' . $files->getClientOriginalExtension();
+        $files->move(public_path("img\Bar "), $imagebar);
 
         Barang::create([
             'id_ruangan' => $request->id_ruangan,
             'nama_barang' => $request->nama_barang,
             'total' => $request->total,
             'broken' => $request->broken,
+            'foto_bar' => $insert['foto_bar'] = "$imagebar",
             'created_by' => $request->created_by,
             'updated_by' => $request->updated_by  
         ]);
@@ -64,10 +70,26 @@ class BarangController extends Controller
 
      public function update($id, Request $request){
         $barang = Barang::findOrFail($id);
+
+        $this->validate($request,[
+            'id_ruangan' => 'required',
+            'nama_barang' => 'required',
+            'total' => 'required',
+            'broken' => 'required',
+            'foto_bar' => 'required|image|mimes:jpeg,jpg,png|max:2048',
+            'created_by' => 'required',
+            'updated_by' => 'required'          
+         ]);
+
         $barang->id_ruangan = $request->id_ruangan;
         $barang->nama_barang = $request->nama_barang;
         $barang->total = $request->total;
         $barang->broken = $request->broken;
+        if( $request->foto_bar){
+            $picture = 'BRG-'.date('Ymdhis').'.'.$request->foto_bar->getClientOriginalExtension();
+            $request->foto_bar->move('img\Bar', $picture);
+            $barang->foto_bar = $picture;
+        }
         $barang->created_by = $request->created_by;
         $barang->updated_by = $request->updated_by;
         $barang->save();

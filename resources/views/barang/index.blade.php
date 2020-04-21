@@ -23,6 +23,7 @@
               <button type="button" class="btn btn-info">All Data</button>
             </a>
           </div>
+          @if(auth()->user()->role == "admin")
           <div class="card-header">
             <a href="{{ url('/barang/create') }}">
               <button type="button" class="btn btn-primary">Add New</button>
@@ -30,7 +31,9 @@
               <button type="button" class="btn btn-success">Export</button>
             </a>
             </a>
+            @endif
           </div>
+          
           <div class="card-body">
             <table class="table table-bordered">
               <thead>
@@ -40,6 +43,7 @@
                   <th scope="col">Nama Barang</th>
                   <th scope="col">Total</th>
                   <th scope="col">Rusak</th>
+                  <th scope="col">Foto</th>
                   <th scope="col">Dibuat</th>
                   <th scope="col">Diupdate</th>
                   <th scope="col">Action</th>
@@ -53,6 +57,8 @@
                   <td>{{$b->nama_barang}}</td>
                   <td>{{ $b->total }}</td>
                   <td>{{ $b->broken }}</td>
+                  <td><img src="{{ url('img/Bar/'.$b->foto_bar) }}" style="object-fit: cover; width: 70px;height: 70px;">
+                    </td>
                   <td> @foreach($user as $us)
                       @if($us->id == $b->created_by)
                       {{ $us->nama_user }}
@@ -64,7 +70,10 @@
                       @endif
                       @endforeach</td>
                   <td><a href="{{url('barang/'.$b->id.'/edit')}}" class="btn btn-warning btn-sm">EDIT</a>
-                    <a href="{{url('barang/'.$b->id.'/delete')}}" class="btn btn-danger btn-sm">DELETE</a></td>
+                     @if(auth()->user()->role == "admin")
+                    <a href="{{url('barang/'.$b->id.'/delete')}}" class="btn btn-danger btn-sm">DELETE</a>
+                     @endif 
+                  </td>
                 </tr>
                @empty
                 <tr>

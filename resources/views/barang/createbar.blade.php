@@ -6,7 +6,18 @@
   <div class="section-header">
     <h1>Barang<small>Add Data</small></h1>
   </div>
-
+@if(count($errors) > 0)
+            <div class="card-body">
+                <div class="alert alert-danger">
+                    Create Error
+                    <ul>
+                        @foreach($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                </div>
+            </div>
+        @endif
   <div class="section-body">
     <div class="col-12 col-md-6 col-lg-6">
         <div class="card">
@@ -41,6 +52,10 @@
                 <div class="form-group">
                 <label>Rusak</label>
                 <input type="text" name="broken" class="form-control">
+              </div>
+              <div class="form-group">
+                <label>Foto</label><br>
+                <input type="file" name="foto_bar" id="foto_bar" accept=".jpeg, .jpg, .png" >
               </div>
               <div class="form-group">
                 <label>Created By</label>

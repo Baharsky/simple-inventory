@@ -8,7 +8,7 @@ use App\Ruangan;
 class Barang extends Model
 {
     protected $table = 'barang';
-    protected $fillable = ['id_ruangan', 'nama_barang', 'total', 'broken', 'created_by', 'updated_by'];
+    protected $fillable = ['id_ruangan', 'nama_barang', 'total', 'broken', 'foto_bar', 'created_by', 'updated_by'];
 
     public function ruangan()
     {
