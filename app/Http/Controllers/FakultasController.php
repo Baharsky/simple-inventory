@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Fakultas;
+use App\Imports\FakultasImport;
+use Maatwebsite\Excel\Facades\Excel;
+
 
 class FakultasController extends Controller
 {
@@ -104,5 +107,19 @@ class FakultasController extends Controller
         $fakultas->delete($fakultas);
 
         return redirect('fakultas');
+    }
+
+    public function import(Request $request){
+        $this->validate($request, [
+            'excel' => 'required'
+        ]);
+
+        $file = $request->file('excel');
+        $filename = date('dmYhis').'-'.$file->getClientOriginalName();
+        $file->move('excel/fakultas', $filename);
+
+        Excel::import(new FakultasImport, public_path('/excel/fakultas/').$filename);
+
+        return redirect()-> route('fakultas.index');
     }
 }

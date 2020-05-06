@@ -29,6 +29,8 @@ Route::get('/fakultas/{id}/edit', 'FakultasController@edit');
 Route::post('/fakultas/{id}/update', 'FakultasController@update');
 //delete
 Route::get('/fakultas/{id}/delete', 'FakultasController@delete');
+//import
+Route::post('/fakultas/import', 'FakultasController@import');
 
 
 
