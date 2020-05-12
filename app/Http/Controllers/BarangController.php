@@ -17,6 +17,7 @@ class BarangController extends Controller
     	$barang = Barang::when($request->search, function($query) use($request){
             $query->where('nama_barang', 'LIKE', '%'.$request->search.'%');
         })->paginate(5);
+    
         $ruangan = Ruangan::all();
         $user = User::all();
 
